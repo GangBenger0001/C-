@@ -1,0 +1,33 @@
+C++函数重载规则讲解
+
+一、什么是函数重载？
+同一个函数名，可以有多个不同的实现，只要它们的参数列表不同。
+
+示例： void func(int a); void func(double a);
+
+二、编译器如何区分？ 通过参数列表： 1. 参数个数 2. 参数类型 3. 参数顺序
+
+三、合法重载情况 1. 参数个数不同 void func(int a); void func(int a, int
+b);
+
+2.  参数类型不同 void func(int a); void func(double a);
+
+3.  参数顺序不同 void func(int a, double b); void func(double a, int b);
+
+四、不合法情况（重点） 1. 只改返回值（错误） int func(int a); double
+func(int a);
+
+2.  参数名不同（无效） void func(int a); void func(int b);
+
+3.  数组 vs 指针（等价，错误） void func(int arr[]); void func(int*
+    arr);
+
+4.  默认参数冲突 void func(int a); void func(int a, int b = 10);
+
+调用 func(5); 会产生歧义
+
+五、函数匹配规则 优先级： 完全匹配 > 类型提升 > 隐式转换
+
+六、本质 函数签名 = 函数名 + 参数列表 编译器通过它区分不同函数
+
+七、总结 函数重载的核心：参数必须不同，返回值不算
